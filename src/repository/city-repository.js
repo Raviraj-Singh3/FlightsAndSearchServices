@@ -31,12 +31,15 @@ class CityRepository{
 
     async updateCity(cityID, data){
         try {
+            // the below approach also works but will not return updated object
+            // if we are using Pgsql then returning: true can be used, else not
             // const city = await City.update(data, {
             //     where: {
             //         id: cityID
             //     }
             // })
             // return city;
+            //for getting updated data in mysql we use the bellow approach
             const city = await City.findByPk(cityID);
             city.name = data.name;
             await city.save();
@@ -52,6 +55,15 @@ class CityRepository{
             const city = await City.findByPk(cityID)
             return city;
             
+        } catch (error) {
+            console.log("something went wrong in the repository layer");
+            throw{error};
+        }
+    }
+    async getAllCities(){
+        try {
+            const cities = await City.findAll();
+            return cities;
         } catch (error) {
             console.log("something went wrong in the repository layer");
             throw{error};
