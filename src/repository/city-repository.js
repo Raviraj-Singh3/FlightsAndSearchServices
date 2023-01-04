@@ -14,6 +14,7 @@ class CityRepository{
             throw{error};
         }
     }
+   
 
     async deleteCity(cityID){
         try {
@@ -61,9 +62,10 @@ class CityRepository{
             throw{error};
         }
     }
-    async getAllCities(filter){
+    async getAllCities(filter){ // filter can be empty also
         try {
-            if(filter){
+            
+            if(filter.name){
                 const cities = await City.findAll({
                     where: {
                         name: {
@@ -75,6 +77,7 @@ class CityRepository{
             }
             const cities = await City.findAll();
             return cities;
+            
         } catch (error) {
             console.log("something went wrong in the repository layer");
             throw{error};

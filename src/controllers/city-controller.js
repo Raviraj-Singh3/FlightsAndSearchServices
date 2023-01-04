@@ -22,6 +22,8 @@ const create = async(req,res)=>{
     }
 }
 
+
+
 const destroy = async(req,res)=>{
     try {
         const response = await cityService.deletecity(req.params.id);
