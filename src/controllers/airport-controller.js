@@ -8,7 +8,7 @@ const createAirport = async(req,res) => {
         return res.status(200).json({
             data: response,
             success: true,
-            message: 'successfully create an airport'
+            message: 'successfully created an airport'
         })
     } catch (error) {
         return res.status(501).json({
@@ -25,7 +25,22 @@ const getAirport = async(req,res) => {
         return res.status(200).json({
             data: response,
             success: true,
-            message: 'successfully create an airport'
+            message: 'successfully fetched an airport'
+        })
+    } catch (error) {
+        return res.status(501).json({
+            data: {},
+            err: error
+        })
+    }
+}
+const updateAirport = async(req,res) => {
+    try {
+        const response = await airportService.updateAirport(req.params.id, req.body);
+        return res.status(200).json({
+            data: response,
+            success: true,
+            message: 'successfully updated an airport'
         })
     } catch (error) {
         return res.status(501).json({
@@ -36,5 +51,6 @@ const getAirport = async(req,res) => {
 }
 module.exports = {
     createAirport,
-    getAirport
+    getAirport,
+    updateAirport
 }

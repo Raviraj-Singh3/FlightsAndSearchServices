@@ -4,6 +4,8 @@ const {PORT} = require('./config/serverConfig');
 const ApiRoutes = require('./routes/index');
 
 const db = require('./models/index');
+const { City, Airport} = require('./models/index');
+
 const setupAndStartServer = async()=>{
 
     const app = express();
@@ -11,14 +13,11 @@ const setupAndStartServer = async()=>{
     app.use(bodyParser.json());
 
     app.use('/api', ApiRoutes);
-    
-    app.get('/api/home/me', (req,res)=>{
-        return res.json({messege: 'me'})
-    })
 
     app.listen(PORT, async()=>{
         console.log("server started at- ",PORT);
         //db.sequelize.sync({alter: true}); sync db with models.
+        
 });
 }
 setupAndStartServer();

@@ -26,5 +26,14 @@ const AirportRepository = require('../repository/airport-repository');
             throw error
         }
     }
+    async updateAirport(airportId,data){
+        try {
+            const airport = await this.airportRepository.updateAirport(airportId,data);
+            return airport;
+        } catch (error) {
+            console.log("something went wrong in service layer");
+            throw error
+        }
+    }
  }
  module.exports = AirportService;

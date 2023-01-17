@@ -34,5 +34,27 @@
             throw error;
         }
     }
+    async updateAirport(airportId,data){
+        try {
+            //     const airport = await Airport.update(data, {
+            //         where: {
+            //         id: airportId
+            //     }
+            // });
+            const airport = await Airport.findByPk(airportId);
+            if(data.address){
+                airport.address = data.address;
+                await airport.save();
+            }
+            if(data.cityId){
+                airport.cityId = data.cityId;
+                await airport.save();
+            }
+            return airport;
+        } catch (error) {
+            console.log("something went wrong in repository layer");
+            throw error;
+        }
+    }
  }
  module.exports = AirportRepository;
