@@ -50,6 +50,15 @@ class CityService{
             throw {error};
         }
     }
+    async createMany(data){
+        try {
+            const cities = await this.cityReposity.createMany(data);
+            return cities;
+        } catch (error) {
+            console.log("something went wrong at service layer");
+            throw error;
+        }
+    }
 }
 
 module.exports = CityService;
