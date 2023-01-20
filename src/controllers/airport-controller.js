@@ -1,10 +1,10 @@
-const AirportService = require('../services/airport-service');
+const { AirportService } = require('../services/index');
 
 const airportService = new AirportService();
 
 const createAirport = async(req,res) => {
     try {
-        const response = await airportService.createAirport(req.body);
+        const response = await airportService.create(req.body);
         return res.status(200).json({
             data: response,
             success: true,
@@ -21,7 +21,7 @@ const createAirport = async(req,res) => {
 
 const getAirport = async(req,res) => {
     try {
-        const response = await airportService.getAirport(req.params.id);
+        const response = await airportService.get(req.params.id);
         return res.status(200).json({
             data: response,
             success: true,
@@ -36,7 +36,7 @@ const getAirport = async(req,res) => {
 }
 const updateAirport = async(req,res) => {
     try {
-        const response = await airportService.updateAirport(req.params.id, req.body);
+        const response = await airportService.update(req.params.id, req.body);
         return res.status(200).json({
             data: response,
             success: true,
@@ -49,8 +49,29 @@ const updateAirport = async(req,res) => {
         })
     }
 }
+
+const destroy = async(req,res)=>{
+    try {
+        const response = await airportService.destroy(req.params.id);
+        return res.status(200).json({
+            data: response,
+            success: true,
+            message: 'Successfully deleted an airport',
+            err: {}
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Not able to delete the city',
+            err: error
+        })
+    }
+}
 module.exports = {
     createAirport,
     getAirport,
-    updateAirport
+    updateAirport,
+    destroy
 }
