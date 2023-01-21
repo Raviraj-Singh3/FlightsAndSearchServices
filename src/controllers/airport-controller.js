@@ -34,6 +34,8 @@ const getAirport = async(req,res) => {
         })
     }
 }
+
+
 const updateAirport = async(req,res) => {
     try {
         const response = await airportService.update(req.params.id, req.body);
@@ -73,5 +75,5 @@ module.exports = {
     createAirport,
     getAirport,
     updateAirport,
-    destroy
+    destroy,
 }
